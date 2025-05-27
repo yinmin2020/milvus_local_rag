@@ -27,7 +27,7 @@ This RAG Application demonstrates how to build a powerful Retrieval-Augmented Ge
   - Adjust similarity thresholds for document retrieval
 - **💾 Vector Database Integration**:
 
-  - Qdrant vector database for efficient similarity search
+  - Milvus vector database for efficient similarity search
   - Persistent storage of document embeddings
 
 ## How to Get Started
@@ -36,7 +36,7 @@ This RAG Application demonstrates how to build a powerful Retrieval-Augmented Ge
 
 - [Ollama](https://ollama.ai/) installed locally
 - Python 3.8+
-- Qdrant account (free tier available) for vector storage
+- Milvus account (free tier available) for vector storage
 - Exa API key (optional, for web search capability)
 
 ### Installation
@@ -60,21 +60,16 @@ pip install -r requirements.txt
 ollama pull qwen3:1.7b # Or any other model you want to use
 ollama pull snowflake-arctic-embed # Or any other model you want to use
 ```
-4. Run Qdrant locally through docker
-```bash
-docker pull qdrant/qdrant
+4. 启动 Milvus（推荐使用 Docker 方式）
 
-docker run -p 6333:6333 -p 6334:6334 \
-    -v "$(pwd)/qdrant_storage:/qdrant/storage:z" \
-    qdrant/qdrant
+```bash
+wget https://github.com/milvus-io/milvus/releases/download/v2.5.12/milvus-standalone-docker-compose.yml -O docker-compose.yml
+
+docker-compose up -d
 ```
 
 
-4. Get your API keys:
-
-   - Exa API key (optional, for web search)
-   
-5. Run the application:
+1. Run the application:
 
 ```bash
 streamlit run qwen_local_rag_agent.py
@@ -90,7 +85,7 @@ streamlit run qwen_local_rag_agent.py
 2. **Vector Database**:
 
    - Document chunks are embedded using Ollama's embedding models
-   - Embeddings are stored in Qdrant vector database
+   - Embeddings are stored in Milvus vector database
    - Similarity search retrieves relevant documents based on query
 3. **Query Processing**:
 
